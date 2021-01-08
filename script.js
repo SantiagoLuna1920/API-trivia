@@ -41,7 +41,13 @@ function addDatas (data) {
                                                      </div>`
         });
         } else {
-            alert("Sin resultados, no se pudieron devolver los resultados. La API no tiene suficientes preguntas para su consulta. (Por ejemplo, pedir 50 preguntas en una categoría que solo tiene 20)")
+            container2.innerHTML+=`<div class="col-md-6" style="margin: auto;">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                    Sin resultados, no se pudieron devolver los resultados. La API no tiene suficientes preguntas para su consulta. (Por ejemplo, pedir 50 preguntas en una categoría que solo tiene 20)
+                                                                    </div>
+                                                                </div>
+                                                     </div>`
         }
     }
     
