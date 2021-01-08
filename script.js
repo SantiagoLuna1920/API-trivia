@@ -27,19 +27,65 @@ function valueI () {
 }
 
 function addDatas (data) {
+    const button = document.createElement("button");
+    const selectT = document.getElementById("selectT").value;
+    button.textContent="Enviar respuestas";
+    button.classList.add("btn", "btn-primary","button-add");
     const container2 = document.getElementById("container2");
-    container2.innerHTML="";
-    if (selectD!=="Selecciona la dificultad" && selectT!=="Selecciona el tipo" && selectC!=="Selecciona la categoria") {
+    let v=0;
+    let inC=0;
+    let inCC=0;
+    let mult=0;
+    let allA=[];
+
+    container2.lastElementChild.innerHTML="";
+
     if (data.response_code==0) {
-        data.results.forEach(element => {
-            container2.innerHTML+=`<div class="col-md-6" style="margin: auto;">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        ${element.question}
-                                                                    </div>
-                                                                </div>
-                                                     </div>`
-        });
+         if (selectT==="multiple") {
+        for (let i=0; i<data.results.length; i++) {
+            container2.lastElementChild.innerHTML+=`<div class="col-md-6" style="margin: auto; margin-top: 30px;">
+            <div class="card">
+                <div class="card-body">
+                    ${data.results[i].question}
+                </div>
+            </div>`;
+            for (let j=0; j<3; j++) {
+
+                container2.lastElementChild.innerHTML+=`<div class="form-check col-md-6" style="margin: auto;">
+                <input value="${data.results[i].incorrect_answers[j]}" class="form-check-input" type="radio" name="${v}" id="${mult++}" required>
+                <label class="form-check-label" for="flexRadioDefault1">
+                ${data.results[i].incorrect_answers[j]}
+                </label>
+                </div>`;
+            }
+            v++;
+        }
+        container2.lastElementChild.innerHTML+=`<button id="buttonM" class="btn btn-primary button-add">Enviar respuestas</button>`;
+
+    } else {
+        let booleano=["False","True"];
+        console.log (booleano)
+        for (let i=0; i<data.results.length; i++) {
+            container2.lastElementChild.innerHTML+=`<div class="col-md-6" style="margin: auto; margin-top: 30px;">
+            <div class="card">
+                <div class="card-body">
+                    ${data.results[i].question}
+                </div>
+            </div>`;
+            for (let j=0; j<2; j++) {
+                container2.lastElementChild.innerHTML+=`<div class="form-check col-md-6" style="margin: auto;">
+                <input value="${booleano[j]}" class="form-check-input" type="radio" name="${inC}" id="${inCC++}" required>
+                <label class="form-check-label" for="flexRadioDefault1">
+                ${booleano[j]}
+                </label>
+                </div>`;
+            }
+            inC++;
+        }
+        container2.lastElementChild.innerHTML+=`<button id="buttonC" class="btn btn-primary button-add form-check">Enviar respuestas</button>`;
+
+    }
+        
         } else {
             container2.innerHTML+=`<div class="col-md-6" style="margin: auto;">
                                                                 <div class="card">
@@ -47,8 +93,38 @@ function addDatas (data) {
                                                                     Sin resultados, no se pudieron devolver los resultados. La API no tiene suficientes preguntas para su consulta. (Por ejemplo, pedir 50 preguntas en una categoría que solo tiene 20)
                                                                     </div>
                                                                 </div>
-                                                     </div>`
-        }
+                                                     </div>`;
     }
-    
 } 
+
+
+function buttonD () {
+    const selectD = document.getElementById("selectD").value;
+    const selectT = document.getElementById("selectT").value;
+    const selectC = document.getElementById("selectC").value;
+    const number = document.getElementById("number").value;
+
+    fetch(`https://opentdb.com/api.php?amount=${number}&category=${selectC}&difficulty=${selectD}&type=${selectT}`)
+    .then((response)=>response.json())
+    .then((data)=> buttonC(data))
+    alert("hola")
+}
+
+function buttonC (data) {
+    /* let j=0; */
+    
+    if (document.getElementById("buttonC")) {
+        let j=1;
+        let aux=0;
+        for (let i=0; i<data.results.length; i++) {
+            aux++;
+            if (document.getElementById(`${i}`).value==data.results[i].correct_answer) {
+                j++;
+            }
+        }
+        
+        alert(`Tu puntaje fue de ${j} respuestas correctas de ${aux} respuestas correctas`);
+    } else {
+        alert("putoo");
+    }
+}
