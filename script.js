@@ -16,6 +16,7 @@ function valueI () {
     const selectC = document.getElementById("selectC").value;
     const number = document.getElementById("number").value;
     if (selectD!=="Selecciona la dificultad" && selectT!=="Selecciona el tipo" && selectC!=="Selecciona la categoria") {
+    
         fetch(`https://opentdb.com/api.php?amount=${number}&category=${selectC}&difficulty=${selectD}&type=${selectT}`)
     .then((response)=>response.json())
     .then((data)=>addDatas(data))
@@ -29,7 +30,7 @@ function addDatas (data) {
     const container2 = document.getElementById("container2");
     container2.innerHTML="";
     if (selectD!=="Selecciona la dificultad" && selectT!=="Selecciona el tipo" && selectC!=="Selecciona la categoria") {
-    
+    if (data.response_code==0) {
         data.results.forEach(element => {
             container2.innerHTML+=`<div class="col-md-6" style="margin: auto;">
                                                                 <div class="card">
@@ -39,7 +40,9 @@ function addDatas (data) {
                                                                 </div>
                                                      </div>`
         });
-        
+        } else {
+            alert("Sin resultados No se pudieron devolver los resultados. La API no tiene suficientes preguntas para su consulta. (Por ejemplo, pedir 50 preguntas en una categoría que solo tiene 20.)")
+        }
     }
     
 } 
