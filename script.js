@@ -41,7 +41,7 @@ function addDatas (data) {
                                                      </div>`
         });
         } else {
-            alert("Sin resultados No se pudieron devolver los resultados. La API no tiene suficientes preguntas para su consulta. (Por ejemplo, pedir 50 preguntas en una categoría que solo tiene 20.)")
+            alert("Sin resultados, no se pudieron devolver los resultados. La API no tiene suficientes preguntas para su consulta. (Por ejemplo, pedir 50 preguntas en una categoría que solo tiene 20)")
         }
     }
     
