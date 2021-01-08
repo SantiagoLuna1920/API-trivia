@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API trivia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+    <div id="container" style="margin: 30px;">
+        <form onsubmit="event.preventDefault(), valueI()">
+            <select id="selectD" style="width: 30%; display: inline-block;" class="form-select" aria-label="Default select example">
+                <option selected>Selecciona la dificultad</option>
+                <option id="easy" value="easy">Easy</option>
+                <option id="medium" value="medium">Medium</option>
+                <option id="hard" value="hard">Hard</option>
+              </select>
+              <select id="selectT" style="width: 30%; display: inline-block;" class="form-select" aria-label="Default select example">
+                <option selected>Selecciona el tipo</option>
+                <option id="true/false" value="boolean">Verdadero o Falso</option>
+                <option id="optionM" value="multiple">Opcion multiple</option>
+              </select>
+              <select id="selectC" style="width: 30%; display: inline-block;" class="form-select" aria-label="Default select example">
+                <option selected>Selecciona la categoria</option>
+                
+              </select>
+              <label style="margin-top: 20px;" for="number">Cantidad de preguntas</label>
+              <input style="width: 30%;" class="form-select" id="number" type="number" value="10" min="1" max="50">
+              <button style="margin: 10px auto;" class="btn btn-primary">Generar preguntas</button>
+        </form>
+
+    </div>
+    <div id="container2">
+
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
